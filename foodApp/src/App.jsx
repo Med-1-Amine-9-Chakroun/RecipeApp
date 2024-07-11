@@ -9,7 +9,7 @@ import FoodDetails from "./components/FoodDetails";
 
 function App() {
   const [foodData, setFoodData] = useState([]);
-  const [foodId, setFoodId] = useState("");
+  const [foodId, setFoodId] = useState("715415");
   useEffect(() => {}, []);
   return (
     <div className="App">
