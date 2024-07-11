@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import styles from "./foodDetails.module.css";
 export default function FoodDetails({ foodId }) {
   const [food, setFood] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -18,31 +18,38 @@ export default function FoodDetails({ foodId }) {
   }, [foodId]);
   return (
     <div>
-      <div>
-        <h1>{food.title}</h1>
+      <div className={styles.recipeCard}>
+        <h1 className={styles.recipeName}>{food.title}</h1>
 
-        <img src={food.image} alt="" />
-        <div>
+        <img className={styles.recipeImage} src={food.image} alt="" />
+        <div className={styles.recipeDetails}>
           <span>
             <strong>⏱{food.readyInMinutes} Minutes</strong>
           </span>
-          <span>{food.servings}</span>
-          <span>{food.vegetarian ? "🥕Vegetarian" : "🥩Non-Vegetarian"}</span>
-          <span>{food.vegan ? "🐄Vegan" : ""}</span>
-          {foodId}
+          <strong>
+            <span>Servers {food.servings}</span>
+            <span>{food.vegetarian ? "🥕Vegetarian" : "🥩Non-Vegetarian"}</span>
+            <span>{food.vegan ? "🐄Vegan" : ""}</span>
+          </strong>
         </div>
         <div>
-          $<span>{food.pricePerServing}</span>
+          <strong>
+            {" "}
+            $<span>{food.pricePerServing / 100} Per serving</span>{" "}
+          </strong>
         </div>
-        <div>
-          <h1>Instructions</h1>
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : (
-            food.analyzedInstructions[0].steps.map((step) => (
-              <li>{step.step}</li>
-            ))
-          )}
+
+        <h1>Instructions</h1>
+        <div className={styles.recipeInstructions}>
+          <ol>
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              food.analyzedInstructions[0].steps.map((step) => (
+                <li>{step.step}</li>
+              ))
+            )}
+          </ol>
         </div>
       </div>
     </div>
